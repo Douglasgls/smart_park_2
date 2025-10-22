@@ -7,8 +7,8 @@ import NoMatch from "./pages/NoMatch";
 import Dashboard from "./pages/Dashboard";
 import Empty from "./pages/Empty";
 import Topnav from "./pages/Topnav";
-import Sidenav from "./pages/Sidenav";
-import Forms from "./pages/Forms";
+// import Sidenav from "./pages/Sidenav";
+import Devices from "./pages/devices/Devices";
 import Tables from "./pages/Tables";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -31,7 +31,7 @@ export const router = createHashRouter([
             },  
             {
                 path: "devices",
-                element: <Forms />,
+                element: <Devices />,
             },
             {
                 path: "parking-space",

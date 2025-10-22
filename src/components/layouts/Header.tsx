@@ -2,7 +2,6 @@ import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Icons } from "@/components/icons";
 import { appConfig } from "@/config/app";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
@@ -20,6 +19,7 @@ import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { Logo } from "../logo";
 import { Accordion } from "@radix-ui/react-accordion";
 import { AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { ModeToggle } from "../mode-toggle";
 
 export function Header() {
     const [open, setOpen] = useState(false)
@@ -163,7 +163,7 @@ export function Header() {
                     </SheetContent>
                 </Sheet>
                 <a href="/" className="mr-6 flex items-center space-x-2 md:hidden">
-                    <Icons.logo className="h-6 w-6" />
+                    {/* <Icons.logo className="h-6 w-6" /> */}
                     <span className="font-bold inline-block">{appConfig.name}</span>
                 </a>
                 {/* right */}
@@ -186,6 +186,7 @@ export function Header() {
                                 )}>
                             </div>
                         </a>
+                        <ModeToggle />
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <Button
@@ -195,21 +196,19 @@ export function Header() {
                                         <AvatarFallback>SC</AvatarFallback>
                                     </Avatar>
                                 </Button>
-                            </DropdownMenuTrigger>
-                           
-                            <DropdownMenuContent className='w-56' align='end' forceMount>
-                                <DropdownMenuLabel className='font-normal'>
-                                    <div className='flex flex-col space-y-1'>
-                                        <p className='text-sm font-medium leading-none'>shadcn</p>
-                                        <p className='text-xs leading-none text-muted-foreground'>
-                                            m@example.com
-                                        </p>
-                                    </div>
-                                </DropdownMenuLabel>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuItem>Log out</DropdownMenuItem>
-                            </DropdownMenuContent>
-                             <h1>douglas</h1>
+                            </DropdownMenuTrigger>                                
+                                <DropdownMenuContent className='w-56'  forceMount>
+                                    <DropdownMenuLabel className='font-normal'>
+                                        <div className='flex flex-col space-y-1'>
+                                            <p className='text-sm font-medium leading-none'>shadcn</p>
+                                            <p className='text-xs leading-none text-muted-foreground'>
+                                                m@example.com
+                                            </p>
+                                        </div>
+                                    </DropdownMenuLabel>
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuItem>Log out</DropdownMenuItem>
+                                </DropdownMenuContent>
                         </DropdownMenu>
                     </nav>
                 </div>
