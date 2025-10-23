@@ -1,52 +1,41 @@
+import { useState } from "react";
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { DeviceForm, DeviceFormValues } from "./FormDevices";
+import { toast } from "sonner";
 
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+export function DialogCreateDevice() {
+  const [open, setOpen] = useState(false);
 
+  async function handleSubmit(values: DeviceFormValues) {
+    try {
+      const response = await fetch("/api/devices", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
 
-export function DialogCreateDevices() {
+      if (!response.ok) throw new Error("Erro ao criar dispositivo");
+
+      toast.success("Dispositivo criado com sucesso!");
+      setOpen(false);
+    } catch {
+      toast.error("Falha ao criar dispositivo");
+    }
+  }
+
   return (
-    <Dialog>
-      <form>
-        <DialogTrigger asChild>
-          <Button variant="outline">Adicionar dispositivo</Button>
-        </DialogTrigger>
-        
-        <DialogContent className="w-80 h-min md:w-full md:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Cadastrar Dispositivo</DialogTitle>
-            <DialogDescription>
-              Preencha os dados abaixo para cadastrar um novo dispositivo de monitoramento.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="grid gap-4">
-            <div className="grid gap-3">
-              <Label htmlFor="name-1">Name</Label>
-              <Input id="name-1" name="name" defaultValue="Pedro Duarte" />
-            </div>
-            <div className="grid gap-3">
-              <Label htmlFor="username-1">Username</Label>
-              <Input id="username-1" name="username" defaultValue="@peduarte" />
-            </div>
-          </div>
-          <DialogFooter className="gap-4">
-            <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
-            </DialogClose>
-            <Button type="submit">Save changes</Button>
-          </DialogFooter>
-        </DialogContent>
-      </form>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button>Adicionar dispositivo</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Cadastrar dispositivo</DialogTitle>
+        </DialogHeader>
+
+        <DeviceForm onSubmit={handleSubmit} />
+      </DialogContent>
     </Dialog>
-  )
+  );
 }
