@@ -1,7 +1,5 @@
 import { PageHeader, PageHeaderHeading } from "@/components/page-header";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { Pencil, Trash } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   Table,
   TableBody,
@@ -11,6 +9,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { DialogCreateDevices } from "./CreateDevices";
+import { DialogEditDevices } from "./EditDevices";
+import { DialogDeleteDevices } from "./DeleteDevices";
 
 export default function Devices() {
 
@@ -24,9 +25,10 @@ export default function Devices() {
 
             {/* cadastrar dispositivo/ editar */}
 
+            <div className="py-5 md:py-10">
+                <DialogCreateDevices />
+            </div>
 
-
-            {/* listar dispositivos */}
 
             <Table>
                 <TableCaption>A list of your recent invoices.</TableCaption>
@@ -52,14 +54,7 @@ export default function Devices() {
                             <TooltipProvider>
                                 <Tooltip>
                                     <TooltipTrigger asChild>
-                                        <Button 
-                                            variant="ghost" 
-                                            size="icon" 
-                                            onClick={() => console.log('Editar fatura INV001')} 
-                                            className="h-8 w-8"
-                                        >
-                                            <Pencil className="h-4 w-4" /> 
-                                        </Button>
+                                        <DialogEditDevices/>
                                     </TooltipTrigger>
                                 </Tooltip>
                             </TooltipProvider>
@@ -67,14 +62,7 @@ export default function Devices() {
                             <TooltipProvider>
                                 <Tooltip>
                                     <TooltipTrigger asChild>
-                                        <Button 
-                                            variant="ghost" 
-                                            size="icon" 
-                                            onClick={() => console.log('Editar fatura INV001')} 
-                                            className="h-8 w-8"
-                                        >
-                                            <Trash className="h-4 w-4" /> 
-                                        </Button>
+                                        <DialogDeleteDevices/>
                                     </TooltipTrigger>
                                 </Tooltip>
                             </TooltipProvider>
