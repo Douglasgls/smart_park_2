@@ -4,6 +4,7 @@ import { Applayout } from "./components/layouts/AppLayout";
 
 import Dashboard from "./pages/Dashboard";
 import Devices from "./pages/devices/Devices";
+import Clients from "./pages/clients/Clients";
 
 export const router = createHashRouter([
     {
@@ -16,7 +17,7 @@ export const router = createHashRouter([
             },
             {
                 path: "clients",
-                element: <Dashboard />,
+                element: <Clients />,
             },  
             {
                 path: "devices",
