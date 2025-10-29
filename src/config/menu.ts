@@ -24,8 +24,8 @@ export const mainMenu: NavItemWithChildren[] = [
         to: '/clients',
     },
     {
-        title: 'Parking Space',
-        to: '/parking-space',
+        title: 'Spots',
+        to: '/spots',
     },
     {
         title: 'Devices',

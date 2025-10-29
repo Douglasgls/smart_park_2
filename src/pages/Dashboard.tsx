@@ -11,7 +11,7 @@ export default function Dashboard() {
     return (
         <>
             <PageHeader>
-                <PageHeaderHeading>Dashboard </PageHeaderHeading>
+                <PageHeaderHeading>Visão Geral de Vagas</PageHeaderHeading>
             </PageHeader>
             
 

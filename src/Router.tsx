@@ -5,6 +5,7 @@ import { Applayout } from "./components/layouts/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import Devices from "./pages/devices/Devices";
 import Clients from "./pages/clients/Clients";
+import Spots from "./pages/spot/Spot";
 
 export const router = createHashRouter([
     {
@@ -24,8 +25,8 @@ export const router = createHashRouter([
                 element: <Devices />,
             },
             {
-                path: "parking-space",
-                element: <Dashboard />,
+                path: "spots",
+                element: <Spots />,
             },
         ],
     },
