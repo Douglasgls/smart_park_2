@@ -3,6 +3,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from 
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { ClientForm, ClientFormValues } from "./FormClients";
+import {PlusCircle } from "lucide-react";
 
 export function DialogCreateClients() {
   const [open, setOpen] = useState(false);
@@ -27,7 +28,10 @@ export function DialogCreateClients() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>Adicionar Cliente</Button>
+        <Button className="inline-flex items-center gap-2 shadow-sm">
+          <PlusCircle className="w-4 h-4" />
+          Adicionar Cliente
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

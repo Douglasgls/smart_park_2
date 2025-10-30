@@ -1,5 +1,5 @@
 import { PageHeader, PageHeaderHeading } from "@/components/page-header";
-import { Tooltip, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Tooltip, TooltipProvider, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip"; // Adicionado TooltipContent
 import {
   Table,
   TableBody,
@@ -15,91 +15,113 @@ import { DialogEditClient } from "./EditClients";
 import { DialogDeleteClients } from "./DeleteClient";
 import { DialogViewClients } from "./ViewClients";
 
-export default function Devices() {
+interface Client {
+    id: string;
+    name: string;
+    plate: string;
+    cpf: string;
+    telephone: string;
+    email: string;
+}
+
+export default function Clients() {
+
+    const clients: Client[] = [
+        {
+            id: '1',
+            name: 'João da Silva',
+            plate: 'ABC1234',
+            cpf: '123.456.789-00',
+            telephone: '81 99999-0000',
+            email: 'joao@example.com',
+        },
+        {
+            id: '2',
+            name: 'Maria Oliveira',
+            plate: 'XYZ9876',
+            cpf: '987.654.321-11',
+            telephone: '11 88888-7777',
+            email: 'maria@example.com',
+        },
+    ];
 
     return (
         <>
             <PageHeader>
-                <PageHeaderHeading>Gerencimento de Clientes</PageHeaderHeading>
+                <PageHeaderHeading>Gerenciamento de Clientes</PageHeaderHeading>
             </PageHeader>
 
-            {/* cadastrar Cliente editar */}
-            <div className="py-5 md:py-10">
+            <div className="flex justify-between items-center py-6">
                 <DialogCreateClients />
             </div>
+            <div className="rounded-md border shadow-sm overflow-hidden"> 
+                <Table>
+                    <TableCaption>Lista de clientes cadastrados no sistema.</TableCaption>
 
+                    <TableHeader>
+                        <TableRow className="bg-muted/30"> 
+                        <TableHead className="w-[160px]">Nome</TableHead> 
+                        <TableHead className="text-center hidden sm:table-cell">Placa</TableHead>
+                        <TableHead className="text-center hidden md:table-cell">CPF</TableHead>
+                        <TableHead className="text-center hidden lg:table-cell">Telefone</TableHead>
+                        <TableHead className="text-center hidden lg:table-cell">Email</TableHead>
+                        <TableHead className="text-center">Ações</TableHead>
+                        </TableRow>
+                    </TableHeader>
 
-            <Table>
-                <TableCaption>Lista de clientes</TableCaption>
+                    <TableBody>
+                        {clients.map((client) => ( 
+                            <TableRow 
+                                key={client.id}
+                                className="hover:bg-muted/20 transition-colors cursor-pointer" 
+                            >
+                                <TableCell className="font-medium">{client.name}</TableCell>
+                                <TableCell className="text-center hidden sm:table-cell text-muted-foreground">{client.plate}</TableCell>
+                                <TableCell className="text-center hidden md:table-cell text-muted-foreground">{client.cpf}</TableCell>
+                                <TableCell className="text-center hidden lg:table-cell text-muted-foreground">{client.telephone}</TableCell>
+                                <TableCell className="text-center hidden lg:table-cell text-muted-foreground">{client.email}</TableCell>
+                                <TableCell className="text-center">
+                                    <div className="flex justify-center items-center gap-2">
+                                        
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                                <TooltipTrigger asChild>
+                                                    <DialogViewClients client={client} />
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                    <p>Visualizar detalhes</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
 
-                <TableHeader>
-                    <TableRow>
-                    <TableHead className="w-[100px]">Nome</TableHead>
-                    <TableHead className="text-right">Placa</TableHead>
-                    <TableHead className="hidden md:table-cell">Telefone</TableHead>
-                    <TableHead className="hidden lg:table-cell">Email</TableHead>
-                    <TableHead className="text-right">Status</TableHead>
-                    <TableHead className="text-right">Ações</TableHead>
-                    </TableRow>
-                </TableHeader>
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                                <TooltipTrigger asChild>
+                                                    <DialogEditClient client={client} />
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                    <p>Editar cliente</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
 
-                <TableBody>
-                    <TableRow>
-                    <TableCell className="font-medium">João da Silva</TableCell>
-                    <TableCell className="text-right">ABC1234</TableCell>
-                    <TableCell className="hidden md:table-cell">81 99999-0000</TableCell>
-                    <TableCell className="hidden lg:table-cell">joao@example.com</TableCell>
-                    <TableCell className="text-right">🟢 Online</TableCell>
-                    <TableCell className="text-right">
-                        <div className="flex gap-2 items-center justify-end">
-
-                            <div className="lg:hidden">
-                            <TooltipProvider>
-                                <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <DialogViewClients 
-                                        client={{
-                                            id: '1',
-                                            name: 'João da Silva',
-                                            plate: 'ABC1234',
-                                            telephone: '81 99999-0000',
-                                            email: 'joao@example.com',
-                                        }}
-                                    />
-                                </TooltipTrigger>
-                                </Tooltip>
-                            </TooltipProvider>
-                        </div>
-
-                        <TooltipProvider>
-                            <Tooltip>
-                            <TooltipTrigger asChild>
-                                <DialogEditClient
-                                client={{
-                                    id: '1',
-                                    name: 'João da Silva',
-                                    plate: 'ABC1234',
-                                    telephone: '81 99999-0000',
-                                    email: 'joao@example.com',
-                                }}
-                                />
-                            </TooltipTrigger>
-                            </Tooltip>
-                        </TooltipProvider>
-
-                        <TooltipProvider>
-                            <Tooltip>
-                            <TooltipTrigger asChild>
-                                <DialogDeleteClients clientId="1" />
-                            </TooltipTrigger>
-                            </Tooltip>
-                        </TooltipProvider>
-
-                        </div>
-                    </TableCell>
-                    </TableRow>
-                </TableBody>
-            </Table>
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                                <TooltipTrigger asChild>
+                                                    <DialogDeleteClients clientId={client.id} />
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                    <p>Excluir cliente</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
+                                    </div>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </div>
         </>
     )
 }

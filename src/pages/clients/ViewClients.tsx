@@ -30,7 +30,7 @@ export function DialogViewClients({ client }: DialogViewClientsProps) {
                     onClick={() => console.log(`Visualizar cliente: ${client.id}`)} 
                     className="h-8 w-8"
                 >
-                    <Eye className="h-4 w-4" /> 
+                    <Eye className="h-4 w-4 text-blue-600" /> 
                 </Button>
         </DialogTrigger>
 
